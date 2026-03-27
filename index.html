@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Groupe Solyance Lux — La Genèse de la Lumière</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.min.js"></script>
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    :root{--gold:#7A5C1E;--gold-bright:#C4A050;--gold-dark:#5A4010;--cream:#F8F2E4;--cream-warm:#FDFAF3;--beige:#F5EDD8;--text-dark:#3A2800;--text-muted:#A08850;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Montserrat',system-ui,sans-serif;--ease:cubic-bezier(0.16,1,0.3,1);}
+    html,body{width:100%;height:100%;overflow:hidden;background:var(--cream);color:var(--text-dark);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+    #loader{position:fixed;inset:0;z-index:9999;background:var(--cream-warm);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 1.8s var(--ease),visibility 1.8s;}
+    #loader.out{opacity:0;visibility:hidden;pointer-events:none;}
+    .ld-orb{width:50px;height:50px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#F5EDD8,#C4A050 55%,#7A5C1E 100%);box-shadow:0 0 60px 30px rgba(196,160,80,0.18);animation:ldP 2s ease-in-out infinite;}
+    @keyframes ldP{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+    .ld-txt{margin-top:32px;font-family:var(--serif);font-size:13px;letter-spacing:8px;color:var(--gold);text-transform:uppercase;font-weight:600;}
+    .ld-sub{margin-top:14px;font-size:11px;color:var(--text-muted);letter-spacing:2px;}
+    #intro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:#0a0600;overflow:hidden;transition:opacity 1.8s var(--ease),visibility 1.8s;}
+    #intro::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 75%,rgba(255,160,40,0.35) 0%,rgba(200,120,20,0.18) 25%,rgba(120,60,10,0.08) 50%,transparent 70%),radial-gradient(ellipse 120% 40% at 50% 100%,rgba(255,200,80,0.25) 0%,rgba(180,100,20,0.1) 40%,transparent 60%),radial-gradient(circle at 50% 85%,rgba(255,220,120,0.5) 0%,rgba(255,180,60,0.15) 20%,transparent 45%);z-index:0;animation:introGlow 6s ease-in-out infinite alternate;}
+    #intro::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,transparent 30%,rgba(0,0,0,0.4) 100%);z-index:1;}
+    @keyframes introGlow{0%{opacity:0.8;transform:scale(1)}100%{opacity:1;transform:scale(1.03)}}
+    .intro-stars{position:absolute;inset:0;z-index:0;background-image:radial-gradient(1px 1px at 10% 20%,rgba(255,220,150,0.4),transparent),radial-gradient(1px 1px at 30% 15%,rgba(255,200,120,0.3),transparent),radial-gradient(1px 1px at 70% 25%,rgba(255,220,150,0.35),transparent),radial-gradient(1px 1px at 85% 10%,rgba(255,200,120,0.25),transparent),radial-gradient(1px 1px at 50% 8%,rgba(255,220,150,0.3),transparent),radial-gradient(1.5px 1.5px at 20% 5%,rgba(255,200,120,0.4),transparent),radial-gradient(1px 1px at 60% 18%,rgba(255,220,150,0.2),transparent),radial-gradient(1px 1px at 90% 30%,rgba(255,200,120,0.3),transparent);}
+    #intro.out{opacity:0;visibility:hidden;pointer-events:none;}
+    .intro-content{position:relative;z-index:2;}
+    .intro-brand{font-size:10px;font-weight:600;letter-spacing:6px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:48px;text-shadow:0 0 20px rgba(196,160,80,0.4);}
+    .intro-h1{font-family:var(--serif);font-size:clamp(36px,6vw,72px);font-weight:300;font-style:italic;line-height:1.15;max-width:700px;padding:0 32px;color:#F5EDD8;text-shadow:0 2px 30px rgba(196,160,80,0.3);}
+    .intro-desc{margin-top:28px;max-width:480px;padding:0 32px;font-size:14px;line-height:1.8;color:rgba(245,237,216,0.7);font-weight:300;}
+    .intro-btn{margin-top:52px;padding:15px 42px;border:1px solid rgba(196,160,80,0.5);background:rgba(196,160,80,0.08);color:var(--gold-bright);font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;cursor:pointer;transition:all .5s var(--ease);backdrop-filter:blur(4px);text-shadow:0 0 10px rgba(196,160,80,0.3);}
+    .intro-btn:hover{background:var(--gold-bright);color:#0a0600;box-shadow:0 0 60px rgba(196,160,80,0.4),0 0 120px rgba(196,160,80,0.15);}
+    #film{position:fixed;inset:0;opacity:0;visibility:hidden;transition:opacity 1.5s var(--ease),visibility 1.5s;}
+    #film.on{opacity:1;visibility:visible;}
+    .vw{position:fixed;inset:-6%;width:112%;height:112%;z-index:0;overflow:hidden;opacity:0;transition:opacity 1.0s ease-in-out;}
+    .vw.active{opacity:1;z-index:1;}.vw.behind{opacity:0;z-index:0;}
+    .vw video{width:100%;height:100%;object-fit:cover;will-change:transform;}
+    @keyframes kb1{from{transform:scale(1) translate(0,0)}to{transform:scale(1.10) translate(-0.8%,-0.5%)}}
+    @keyframes kb2{from{transform:scale(1.06) translate(0.5%,0)}to{transform:scale(1) translate(-0.5%,0.5%)}}
+    @keyframes kb3{from{transform:scale(1) translate(0,0.5%)}to{transform:scale(1.08) translate(0.5%,-0.5%)}}
+    @keyframes kb4{from{transform:scale(1.04) translate(-0.5%,0.3%)}to{transform:scale(1) translate(0.3%,0)}}
+    .vw.kb1 video{animation:kb1 7s ease-in-out forwards;}
+    .vw.kb2 video{animation:kb2 7s ease-in-out forwards;}
+    .vw.kb3 video{animation:kb3 7s ease-in-out forwards;}
+    .vw.kb4 video{animation:kb4 7s ease-in-out forwards;}
+    .dark-ov{position:fixed;inset:0;z-index:2;background:radial-gradient(ellipse at 50% 50%,transparent 0%,rgba(0,0,0,0.15) 100%);pointer-events:none;}
+    .vignette{position:fixed;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 80px 20px rgba(0,0,0,0.1);}
+    .hd{position:fixed;top:0;left:0;right:0;z-index:50;padding:24px 40px;display:flex;justify-content:space-between;align-items:center;}
+    .hd-logo{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold-bright);}
+    .hd-snd{width:42px;height:42px;border-radius:50%;border:1px solid rgba(196,160,80,0.3);background:rgba(0,0,0,0.25);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .4s;color:var(--gold-bright);}
+    .hd-snd:hover{background:rgba(196,160,80,0.15);border-color:var(--gold-bright);}
+    .hd-snd svg{width:18px;height:18px;}
+    #subs{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);z-index:30;text-align:center;max-width:720px;width:90%;font-family:var(--serif);font-size:clamp(16px,2.3vw,26px);line-height:1.6;color:rgba(255,255,255,0.95);opacity:0;transition:opacity 0.5s ease;pointer-events:none;text-shadow:0 2px 14px rgba(0,0,0,0.85),0 0 40px rgba(0,0,0,0.5);}
+    #subs.on{opacity:1;}
+    #chCard{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:40;text-align:center;opacity:0;transition:opacity 1.2s var(--ease);pointer-events:none;}
+    #chCard.on{opacity:1;}
+    .ch-num{font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:var(--gold-bright);margin-bottom:14px;}
+    .ch-title{font-family:var(--serif);font-size:clamp(28px,5vw,58px);font-weight:300;font-style:italic;line-height:1.2;text-shadow:0 4px 30px rgba(0,0,0,0.5);}
+    .ch-title em{color:var(--gold-bright);}
+    .dots{position:fixed;right:40px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:14px;}
+    .dot{width:7px;height:7px;border-radius:50%;border:1px solid rgba(196,160,80,0.25);background:transparent;cursor:pointer;transition:all .4s;}
+    .dot.on{background:var(--gold-bright);border-color:var(--gold-bright);box-shadow:0 0 10px rgba(196,160,80,0.4);}
+    .bnav{position:fixed;bottom:28px;left:0;right:0;z-index:50;padding:0 40px;display:flex;justify-content:space-between;align-items:center;}
+    .bnav-left{display:flex;align-items:center;gap:14px;}
+    .bnav-num{width:34px;height:34px;border-radius:50%;border:1px solid rgba(196,160,80,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:14px;color:var(--gold-bright);font-weight:300;}
+    .bnav-name{font-size:10px;letter-spacing:2px;color:rgba(255,255,255,0.35);}
+    .bnav-skip{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);background:none;border:none;cursor:pointer;transition:color .3s;}
+    .bnav-skip:hover{color:var(--gold-bright);}
+    #outro{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:rgba(248,242,228,0.96);opacity:0;visibility:hidden;transition:opacity 2.5s var(--ease),visibility 2.5s;}
+    #outro.on{opacity:1;visibility:visible;}
+    #outro h2{font-family:var(--serif);font-size:clamp(26px,4.5vw,54px);font-weight:300;font-style:italic;line-height:1.25;margin-bottom:20px;color:var(--text-dark);}
+    #outro h2 em{color:var(--gold);}
+    #outro p{font-size:14px;line-height:1.8;color:var(--text-muted);max-width:520px;padding:0 32px;}
+    .outro-btn{display:inline-block;margin-top:44px;padding:14px 34px;border:1px solid rgba(122,92,30,0.3);background:transparent;color:var(--gold);font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;cursor:pointer;transition:all .5s var(--ease);text-decoration:none;}
+    .outro-btn:hover{background:var(--gold);color:var(--cream-warm);}
+    .grain{position:fixed;inset:0;z-index:99;pointer-events:none;opacity:0.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+    #pbar{position:fixed;bottom:0;left:0;height:2px;background:linear-gradient(to right,var(--gold),var(--gold-bright));z-index:60;width:0;transition:width 0.3s linear;}
+    @media(max-width:768px){.dots{display:none;}.hd,.bnav{padding-left:20px;padding-right:20px;}#subs{bottom:75px;font-size:15px;}}
+  </style>
+</head>
+<body>
+<div id="loader"><div class="ld-orb"></div><div class="ld-txt">Groupe Solyance Lux</div><div class="ld-sub">Chargement de l'expérience...</div></div>
+<div id="intro">
+  <div class="intro-stars"></div>
+  <div class="intro-content">
+    <div class="intro-brand">Groupe Solyance Lux</div>
+    <h1 class="intro-h1">La Genèse<br>de la Lumière</h1>
+    <p class="intro-desc">De la naissance de notre étoile à la chaleur de votre salon — découvrez comment le soleil a façonné notre monde, et comment Solyance Lux a appris à capturer la lumière du solstice d'été.</p>
+    <button class="intro-btn" id="enterBtn">Entrer dans l'expérience</button>
+  </div>
+</div>
+<div id="film">
+  <div class="vw" id="wA"><video id="vA" muted playsinline preload="auto"></video></div>
+  <div class="vw" id="wB"><video id="vB" muted playsinline preload="auto"></video></div>
+  <div class="dark-ov"></div><div class="vignette"></div>
+  <div class="hd">
+    <div class="hd-logo">Groupe Solyance Lux</div>
+    <button class="hd-snd" id="sndBtn" aria-label="Sound"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path class="sw" d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path class="sw" d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg></button>
+  </div>
+  <div id="chCard"><div class="ch-num" id="chNum"></div><div class="ch-title" id="chTitle"></div></div>
+  <div id="subs"></div>
+  <div class="dots" id="dotsC"></div>
+  <div class="bnav"><div class="bnav-left"><div class="bnav-num" id="bNum">1</div><div class="bnav-name" id="bName"></div></div><button class="bnav-skip" id="skipBtn">Passer le chapitre</button></div>
+  <div id="pbar"></div>
+</div>
+<div id="outro">
+  <h2>La lumière du solstice d'été,<br><em>capturée pour toujours.</em></h2>
+  <p>Groupe Solyance Lux recrée le spectre précis du soleil à son apogée — le solstice d'été — apportant chaleur, couleur et vie dans chaque pièce que vous habitez.</p>
+  <a href="produits.html" class="outro-btn">Découvrir Groupe Solyance Lux</a>
+</div>
+<div class="grain"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ══════════════════════════════════════════════════════════════
+   GROUPE SOLYANCE LUX — THE GENESIS OF LIGHT  (v16)
+
+   Style: Yann Arthus-Bertrand aerial documentary — dynamic,
+   luminous, golden. The SUN is the only protagonist.
+   ALL clips are BRIGHT, GOLDEN, SUN-DRENCHED aerial footage.
+   No dark clips, no cars, no volcanos, no abstract light flux,
+   no humans, no cities, no lamps, no waterfalls.
+
+   28 clips · 3.35s each = 93.8s · 1.0s crossfade · Ken Burns
+   EVERY CLIP: sunlit, golden hour, aerial drone, Arthus-Bertrand.
+   14 voice segments = continuous narration ~94s = 100% coverage.
+
+   ENGINE: bulletproof — old clip stays visible until new clip
+   is ACTUALLY loaded. Broken URLs are skipped automatically.
+══════════════════════════════════════════════════════════════ */
+
+var DUR=3350, KB=['kb1','kb2','kb3','kb4'], ki=0;
+var P='https://videos.pexels.com/video-files/';
+
+/* ── 28 CLIPS — ALL URLs VERIFIED — NATURE + FACTORY FINALE ── */
+var C=[
+  // ── PROLOGUE: BIRTH OF THE SUN (4) ── [all verified UHD]
+  P+'1851190/1851190-uhd_2560_1440_25fps.mp4',              // 0  Earth from space — sun illuminating surface
+  P+'3858839/3858839-uhd_2560_1440_24fps.mp4',              // 1  Sunrise over water — golden rays
+  P+'8346482/8346482-uhd_2560_1440_25fps.mp4',              // 2  Ocean sunset drone UHD
+  P+'8346620/8346620-uhd_2560_1440_25fps.mp4',              // 3  Aerial landscape UHD
+
+  // ── CH1: THE FIRST SUNRISE (4) ──
+  P+'34420228/14581443_2560_1440_60fps.mp4',                // 4  Stunning aerial sunrise over mountain range UHD
+  P+'17717128/17717128-uhd_2560_1440_60fps.mp4',            // 5  Aerial view of sunlit forest canopy UHD
+  P+'35265747/14939972_2560_1440_60fps.mp4',                // 6  Aerial sunrise over the Alps UHD
+  P+'33354461/14202813_2560_1440_30fps.mp4',                // 7  Stunning mountain sunrise aerial view UHD
+
+  // ── CH2: SUN GIVES LIFE (5) — all verified UHD ──
+  P+'4010941/4010941-uhd_2560_1440_25fps.mp4',              // 8  Maldives island drone — turquoise paradise UHD
+  P+'4232189/4232189-uhd_2560_1440_24fps.mp4',              // 9  Rice terraces drone — lush green Bali UHD
+  P+'3191710/3191710-uhd_2560_1440_25fps.mp4',              // 10 Rice fields with tropical trees — aerial green UHD
+  P+'32651074/13921538_2560_1440_60fps.mp4',                // 11 Aerial volcanic mountain at sunrise UHD
+  P+'34672210/14695778_2560_1440_60fps.mp4',                // 12 Philippine island lagoons — stunning aerial UHD
+
+  // ── CH3: SUN SCULPTS THE EARTH (5) — all verified UHD ──
+  P+'33315180/14188260_2560_1440_50fps.mp4',                // 13 Breathtaking aerial tropical beach UHD
+  P+'27295798/12112901_2560_1440_60fps.mp4',                // 14 Laguna de Bacalar — turquoise paradise aerial UHD
+  P+'35691054/15126153_2730_1440_24fps.mp4',                // 15 Scenic beach cliffside aerial at sunset UHD
+  P+'33898087/14385965_2560_1440_60fps.mp4',                // 16 Tropical coral reefs aerial — turquoise ocean UHD
+  P+'34509724/14621522_2560_1440_25fps.mp4',                // 17 Lush tropical rainforest canopy — sunlit green UHD
+
+  // ── CH4: THE SUMMER SOLSTICE (5) ──
+  P+'32403724/13822914_2560_1440_25fps.mp4',                // 18 Aerial view Bali coastline at sunset UHD
+  P+'28528358/12409594_2560_1440_24fps.mp4',                // 19 Drone sunset beautiful natural scenery UHD
+  P+'32189096/13727068_2560_1440_30fps.mp4',                // 20 Scenic Mallorca coastline — warm green Mediterranean UHD
+  P+'31680772/13497820_2560_1440_30fps.mp4',                // 21 Stunning beach sunset with ocean waves UHD
+  P+'35256498/14936399_2560_1440_60fps.mp4',                // 22 Isolated tropical island aerial — paradise UHD
+
+  // ── CH5: GROUPE SOLYANCE LUX — CAPTURE THE SUN (5) — nature→factory ──
+  P+'30060006/12893729_2560_1440_24fps.mp4',                // 23 Aerial sunset over calm ocean waters — golden light UHD
+  P+'32386617/13814646_2560_1440_30fps.mp4',                // 24 Modern high-tech factory overview UHD
+  P+'32386621/13814766_2560_1440_100fps.mp4',               // 25 Automated manufacturing line UHD
+  P+'32386590/13814640_2560_1440_100fps.mp4',               // 26 Advanced robotics factory UHD
+  P+'32386529/13814862_2560_1440_100fps.mp4'                // 27 Robotic arm precision — sun's light reborn
+];
+
+var CH=[
+  {n:'Naissance du Soleil',       l:'Prologue',         t:'Au<br><em>Commencement</em>',                    s:0, e:4},
+  {n:'Le Premier Lever de Soleil',l:'Chapitre Un',     t:'Le Premier<br><em>Lever de Soleil</em>',        s:4, e:8},
+  {n:'Le Soleil Donne la Vie',    l:'Chapitre Deux',   t:'Le Soleil<br><em>Donne la Vie</em>',            s:8, e:13},
+  {n:'Le Soleil Sculpte la Terre',l:'Chapitre Trois',  t:'La Lumière Sculpte<br><em>la Terre</em>',       s:13,e:18},
+  {n:'Le Solstice d\'Été',         l:'Chapitre Quatre', t:'Le Solstice<br><em>d\'Été</em>',                 s:18,e:23},
+  {n:'Groupe Solyance Lux',       l:'Chapitre Cinq',   t:'Capturer<br><em>le Soleil</em>',                s:23,e:28}
+];
+
+/* ══════════════════════════════════════════════════════════════
+   NARRATION — Style Yann Arthus-Bertrand
+   Documentary voice: contemplative, poetic, factual.
+
+   14 voice sprites from sfx.webm = ~94s total.
+   20 clips × 4.7s = 94s.
+   Voice triggers spaced so each QUEUES before the previous
+   ends → zero silence, continuous narration.
+
+   Clip timings (3350ms each, 28 clips):
+   0=0s  1=3.35s  2=6.7s  3=10.05s  4=13.4s  5=16.75s
+   6=20.1s  7=23.45s  8=26.8s  9=30.15s  10=33.5s
+   11=36.85s  12=40.2s  13=43.55s  14=46.9s  15=50.25s
+   16=53.6s  17=56.95s  18=60.3s  19=63.65s  20=67.0s
+   21=70.35s  22=73.7s  23=77.05s  24=80.4s  25=83.75s
+   26=87.1s  27=90.45s  END=93.8s
+
+   Voice chain (cumulative, 200ms gaps):
+   v1: 0→7.08s  v2: 7.28→13.31s  v3: 13.51→18.5s
+   v4: 18.7→23.07s  v5: 23.27→29.0s  v6: 29.2→34.31s
+   v7: 34.51→37.87s  v8: 38.07→43.22s  v9: 43.42→50.24s
+   v10: 50.44→59.88s  v11: 60.08→67.4s  v12: 67.6→77.38s
+   v13: 77.58→83.97s  v14: 84.17→94.03s
+══════════════════════════════════════════════════════════════ */
+var VT=[
+  // ── PROLOGUE — clip 0 (0s) ──
+  {c:0, sp:'ch-1-1', tx:'Il y a quatre milliards et demi d\'années, dans un vaste nuage de poussière cosmique, la gravité a commencé son travail silencieux. Les particules se sont heurtées, les températures ont grimpé, et au cœur de cet immense chaos, une étoile est née. Notre soleil. Sa lumière a jailli — traversant le vide pour atteindre un petit monde bleu.'},
+
+  // ── clip 1 (3.35s) — queued early ──
+  {c:1, sp:'ch-1-2', tx:'Cette première lumière portait quelque chose d\'extraordinaire — un spectre parfait. Chaque longueur d\'onde, de l\'infrarouge profond à l\'ultraviolet, parfaitement équilibrée. Cette lumière allait tout façonner. Sans elle, la Terre serait restée un rocher gelé et sans vie.'},
+
+  // ── clip 2 (6.7s) — queued early ──
+  {c:2, sp:'ch-1-3', tx:'Et ainsi vint le premier lever de soleil. Des rayons dorés ont franchi les montagnes d\'une Terre jeune, inondant de chaleur les vallées anciennes. Un nouveau monde est né — éveillé par la lumière de son étoile.'},
+
+  // ── clip 4 (13.4s) ──
+  {c:4, sp:'ch-1-4', tx:'Cette lumière parcourt cent cinquante millions de kilomètres à travers le vide spatial et atteint la Terre en seulement huit minutes. Elle porte l\'énergie qui rend toute vie possible.'},
+
+  // ── CH2 — clip 5 (16.75s) ──
+  {c:5, sp:'ch-2-1', tx:'Sous cette lumière, le miracle de la photosynthèse a commencé. Les plantes ont appris à transformer la lumière du soleil en énergie, en oxygène, en fondation de chaque écosystème. Les tournesols ont appris à suivre le soleil — tournant leur visage à travers le ciel en une dévotion silencieuse.'},
+
+  // ── clip 8 (26.8s) — aerial forest ──
+  {c:8, sp:'ch-2-2', tx:'À travers la canopée, la lumière du soleil devient quelque chose de presque sacré. Chaque feuille filtre et orchestre cette lumière en une cathédrale vivante de vert et d\'or — nourrissant tout ce qui pousse en dessous.'},
+
+  // ── clip 10 (33.5s) — aerial river valley ──
+  {c:10, sp:'ch-2-3', tx:'Pendant des milliards d\'années, cette lumière a sculpté notre planète — creusant des canyons, façonnant des côtes, peignant des déserts de mille nuances d\'ocre et de pourpre.'},
+
+  // ── clip 11 (36.85s) — aerial valley ──
+  {c:11, sp:'ch-2-4', tx:'Le Grand Canyon. Deux milliards d\'années d\'histoire de la Terre, exposés par l\'érosion, illuminés par le soleil. À l\'heure dorée, chaque couche de roche brille de la chaleur des temps géologiques profonds.'},
+
+  // ── CH3 — clip 12 (40.2s) — queued before v8 ends ──
+  {c:12, sp:'ch-3-1', tx:'Aux chutes du Niagara, la lumière du soleil transforme six millions de pieds cubes d\'eau par minute en cascades d\'or liquide. Là où la brume s\'élève à la rencontre de la lumière, des arcs-en-ciel apparaissent — le spectre du soleil rendu visible, chaque couleur une longueur d\'onde différente de sa lumière parfaite.'},
+
+  // ── clip 15 (50.25s) — aerial ocean ──
+  {c:15, sp:'ch-3-2', tx:'Des tours de Manhattan à la silhouette de la Tour Eiffel — le soleil peint les plus grandes villes du monde de son heure dorée. Il ne fait pas de distinction entre la nature et la civilisation. Depuis quatre milliards et demi d\'années, cette même lumière est l\'architecte de toute beauté sur Terre. Et chaque jour, au coucher du soleil, elle nous rappelle sa puissance.'},
+
+  // ── CH4 — clip 17 (56.95s) — aerial savanna ──
+  {c:17, sp:'ch-4-1', tx:'Le vingt-et-un juin, au solstice d\'été, le soleil atteint son point le plus haut. Sa lumière est à son apogée — la plus chaude, la plus dorée, le spectre le plus complet de longueurs d\'onde visibles et invisibles. C\'est cette lumière qui régule notre rythme circadien, produit la vitamine D, renforce nos os et élève notre esprit.'},
+
+  // ── clip 20 (67.0s) — aerial nature sunset ──
+  {c:20, sp:'ch-4-2', tx:'Et pourtant — nous passons quatre-vingt-dix pour cent de notre vie à l\'intérieur. Derrière des murs et des fenêtres qui filtrent les longueurs d\'onde dont notre corps a le plus besoin. Coupés de la lumière du solstice. Coupés de la lumière qui nous a façonnés, qui nous guérit, qui nous fait nous sentir vivants. Et si nous pouvions capturer le solstice d\'été — analyser son spectre — et le recréer ?'},
+
+  // ── CH5 — clip 23 (77.05s) — aerial golden hour ──
+  {c:23, sp:'outro-1', tx:'C\'est la question à laquelle Groupe Solyance Lux est né pour répondre. Nos ingénieurs ont étudié le spectre du soleil au solstice d\'été — chaque longueur d\'onde, chaque température de couleur, chaque nuance subtile de l\'heure dorée — et l\'ont recréé avec une précision absolue.'},
+
+  // ── clip 25 (83.75s) — aerial sunset finale ──
+  {c:25, sp:'outro-2', tx:'Le résultat : une lumière qui ressemble au soleil. Chaude. Dorée. Complète. Groupe Solyance Lux transforme chaque pièce en un espace baigné de la chaleur du solstice d\'été. Quatre milliards et demi d\'années d\'évolution stellaire, capturées dans une seule LED. Forgée par la science, guidée par la nature. Groupe Solyance Lux — le retour du soleil.'}
+];
+
+/* ══════════════════════════════════════════════════════════════
+   HOWLER.JS — English voice & cinematic music
+══════════════════════════════════════════════════════════════ */
+var sfx=new Howl({
+  src:['https://symphonyofvines.unseen.co/wp-content/themes/las-cases/resources/assets/audio/sfx.webm'],
+  sprite:{
+    bg:[0,151000,true],
+    'ch-1-1':[151200,7080],'ch-1-2':[159400,6031],'ch-1-3':[166600,4985],'ch-1-4':[171800,4375],
+    'ch-2-1':[177000,5724],'ch-2-2':[183200,5115],'ch-2-3':[189400,3361],'ch-2-4':[193600,5147],
+    'ch-3-1':[199800,6822],'ch-3-2':[207000,9436],
+    'ch-4-1':[217200,7319],'ch-4-2':[225400,9780],
+    'outro-1':[235600,6391],'outro-2':[242800,9859]
+  },
+  volume:1.0,preload:true,
+  onload:function(){document.querySelector('.ld-sub').textContent='Ready';setTimeout(function(){loader.classList.add('out');},500);},
+  onloaderror:function(){document.querySelector('.ld-sub').textContent='Enter';setTimeout(function(){loader.classList.add('out');},500);}
+});
+var bgId=null,voId=null;
+
+var loader=document.getElementById('loader'),intro=document.getElementById('intro'),film=document.getElementById('film');
+var wA=document.getElementById('wA'),wB=document.getElementById('wB');
+var vA=document.getElementById('vA'),vB=document.getElementById('vB');
+var outroEl=document.getElementById('outro'),enterBtn=document.getElementById('enterBtn');
+var sndBtn=document.getElementById('sndBtn'),skipBtn=document.getElementById('skipBtn');
+var bNum=document.getElementById('bNum'),bName=document.getElementById('bName');
+var pbar=document.getElementById('pbar'),subsEl=document.getElementById('subs');
+var chCard=document.getElementById('chCard'),chNum=document.getElementById('chNum'),chTitle=document.getElementById('chTitle');
+var dotsC=document.getElementById('dotsC');
+
+CH.forEach(function(ch,i){var d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.addEventListener('click',function(){goChapter(i);});dotsC.appendChild(d);});
+var dots=dotsC.querySelectorAll('.dot');
+
+/* ══════════════════════════════════════════════════════════════
+   BULLETPROOF VIDEO ENGINE
+
+   Key principle: the OLD clip stays visible on screen until the
+   NEW clip has ACTUALLY loaded (oncanplay). If a URL is broken
+   (onerror), the clip is skipped entirely — no black frame ever.
+══════════════════════════════════════════════════════════════ */
+var wraps=[wA,wB],vids=[vA,vB],act=0,cur=0,curCh=0,nxt=null,prog=null;
+
+function setKB(w){KB.forEach(function(k){w.classList.remove(k);});w.classList.add(KB[ki%KB.length]);ki++;}
+
+function crossfade(ci){
+  if(ci>=C.length){showOutro();return;}
+  clearTimeout(nxt);cur=ci;
+
+  var na=1-act;
+  var nV=vids[na], nW=wraps[na], oW=wraps[act];
+  var switched=false;
+  var dead=false;
+
+  /* Visual swap — only when new video is ready to display */
+  function doSwitch(){
+    if(switched||dead) return;
+    switched=true;
+    nV.play().catch(function(){});
+    nW.classList.remove('behind');nW.classList.add('active');
+    oW.classList.remove('active');oW.classList.add('behind');
+    act=na;
+  }
+
+  /* Broken / stalled → skip immediately to next clip */
+  function skipNow(){
+    if(dead) return; dead=true; switched=true;
+    nV.oncanplay=null; nV.onerror=null; nV.onstalled=null;
+    try{nV.removeAttribute('src');nV.load();}catch(e){}
+    clearTimeout(nxt);
+    nxt=setTimeout(function(){crossfade(cur+1);},300);
+  }
+
+  /* Reset event handlers before loading */
+  nV.oncanplay=null; nV.onerror=null; nV.onstalled=null;
+  nV.src=C[ci]; nV.load(); setKB(nW);
+
+  /* Trigger swap only when video has actual frames */
+  nV.oncanplay=function(){ doSwitch(); };
+
+  /* Broken URL → skip fast */
+  nV.onerror=function(){ skipNow(); };
+
+  /* Stalled → give 1s grace then skip */
+  nV.onstalled=function(){
+    setTimeout(function(){ if(!switched&&!dead) skipNow(); },1000);
+  };
+
+  /* Safety fallback: if nothing after 1.5s, try or skip */
+  setTimeout(function(){
+    if(!switched&&!dead){
+      if(nV.readyState>=2) doSwitch();
+      else skipNow();
+    }
+  },1500);
+
+  /* Chapter card + voice */
+  var ch=chapOf(ci); if(ch!==curCh){curCh=ch;updUI(ch);showCard(ch);}
+  trigV(ci);
+
+  /* Schedule next clip — normal rhythm */
+  if(!dead) nxt=setTimeout(function(){crossfade(cur+1);},DUR);
+}
+
+function chapOf(i){for(var x=CH.length-1;x>=0;x--){if(i>=CH[x].s)return x;}return 0;}
+
+function goChapter(i){
+  if(i>=CH.length){showOutro();return;}
+  stopV();clearTimeout(nxt);curCh=i;updUI(i);showCard(i);
+  cur=CH[i].s;
+  /* Load first clip of chapter into current active wrapper */
+  var v=vids[act];v.src=C[cur];v.load();setKB(wraps[act]);
+  v.oncanplay=function(){v.play().catch(function(){});};
+  trigV(cur);
+  nxt=setTimeout(function(){crossfade(cur+1);},DUR);
+}
+
+function updUI(i){bNum.textContent=i+1;bName.textContent=CH[i].n;dots.forEach(function(d,j){d.classList.toggle('on',j===i);});}
+function showCard(i){chNum.textContent=CH[i].l;chTitle.innerHTML=CH[i].t;chCard.classList.add('on');setTimeout(function(){chCard.classList.remove('on');},3200);}
+
+/* ── VOICE — continuous narration engine ── */
+var vQ=[],vP=false;
+function trigV(ci){VT.forEach(function(v){if(v.c===ci)vQ.push(v);});if(!vP&&vQ.length)playV();}
+function playV(){
+  if(!vQ.length){vP=false;subsEl.classList.remove('on');if(bgId!==null)sfx.fade(sfx.volume(bgId),0.65,500,bgId);return;}
+  vP=true;var v=vQ.shift();
+  subsEl.textContent=v.tx;subsEl.classList.add('on');
+  if(bgId!==null)sfx.fade(sfx.volume(bgId),0.12,300,bgId);
+  voId=sfx.play(v.sp);sfx.volume(0.95,voId);
+  sfx.once('end',function(){setTimeout(playV,200);},voId);
+}
+function stopV(){vQ=[];vP=false;if(voId!==null){sfx.stop(voId);voId=null;}subsEl.classList.remove('on');subsEl.textContent='';if(bgId!==null)sfx.volume(0.65,bgId);}
+
+function startProg(){clearInterval(prog);prog=setInterval(function(){pbar.style.width=((cur/C.length)*100)+'%';},250);}
+function showOutro(){stopV();clearTimeout(nxt);clearInterval(prog);pbar.style.width='100%';setTimeout(function(){outroEl.classList.add('on');},800);}
+
+/* ── START — wait for first clip to load before showing film ── */
+enterBtn.addEventListener('click',function(){
+  intro.classList.add('out');film.classList.add('on');
+  bgId=sfx.play('bg');sfx.volume(0,bgId);sfx.fade(0,0.65,3000,bgId);
+  cur=0;curCh=0;act=0;
+
+  var v=vids[0];
+  v.src=C[0]; v.load(); setKB(wraps[0]);
+  wraps[1].classList.add('behind');
+
+  var started=false;
+  function begin(){
+    if(started) return; started=true;
+    v.play().catch(function(){});
+    wraps[0].classList.add('active');
+    updUI(0);showCard(0);trigV(0);
+    nxt=setTimeout(function(){crossfade(1);},DUR);
+    startProg();
+  }
+  v.oncanplay=begin;
+  setTimeout(begin,2500); /* fallback — never leave user on black */
+});
+
+var muted=false;
+sndBtn.addEventListener('click',function(){muted=!muted;Howler.mute(muted);sndBtn.querySelectorAll('.sw').forEach(function(s){s.style.display=muted?'none':'';});});
+skipBtn.addEventListener('click',function(){if(curCh<CH.length-1)goChapter(curCh+1);else showOutro();});
+setTimeout(function(){loader.classList.add('out');},5000);
+})();
+</script>
+</body>
+</html>
